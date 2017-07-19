@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h2 駐車場状況
+  
+  ul.parking-list
+    each i in [0,0,0]
+      li
+        .parking-status 空
+        .parking-name 物質棟側駐車場
+        a(href="/parking/1")
+          span.ion-android-car
+    
+  h2 ポイント
+  
+  table.table
+    tr
+      th 所持ポイント
+      td 302pt
+  
+  a.btn.btn-center.btn-info.btn-sm(href="/charge") チャージ

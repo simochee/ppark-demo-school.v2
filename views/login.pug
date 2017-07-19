@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    
+    h1 ログイン
+    
+    form.login-form(action="" method="post")
+
+        label.input-icon
+            .icon.ion-person
+            input(type="text" name="userId" placeholder="ユーザーID")
+        
+        label.input-icon
+            .icon.ion-locked
+            input(type="password" name="password" placeholder="パスワード")
+        
+        label.input-checkbox
+            input(type="checkbox" checked disabled)
+            | ログイン状態を維持する
+        
+        button.btn.btn-block.btn-primary(type="submit") ログイン
