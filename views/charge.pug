@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1 ポイントチャージ
+
+    form(action="" method="post")
+        table.table
+            tr
+                th 所持Ｐ
+                td.danger -20pt
+            tr
+                th チャージＰ
+                td.charge-point
+                    input(type="number" name="point" placeholder="Point")
+                    button(type="button") +10
+                    button(type="button") +100
+                    button(type="button") +1,000
+            tr
+                th チャージ後Ｐ
+                td.success 330pt
+        
+        button.btn.btn-center.btn-info.btn-sm(type="submit") チャージ

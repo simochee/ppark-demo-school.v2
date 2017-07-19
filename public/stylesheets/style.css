@@ -158,9 +158,13 @@ body {
 .container {
   background: #fff;
   box-shadow: 0 0 2px #000;
+  box-sizing: border-box;
   max-width: 480px;
   margin: 0 auto;
   min-height: 100%;
+  padding-bottom: 140px;
+  overflow: hidden;
+  position: relative;
 }
 .btn {
   border: none;
@@ -197,6 +201,36 @@ body {
 }
 .btn-success {
   background: #18bc9c;
+}
+footer {
+  background: #5d87b7;
+  bottom: 0;
+  height: 100px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+footer .thanks {
+  color: rgba(255,255,255,0.8);
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  padding: 10px 0;
+}
+footer .contact {
+  background: #555;
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  height: 40px;
+  line-height: 40px;
+}
+footer .contact a {
+  margin: 0 0.4em;
+  color: #fff;
+  text-decoration: none;
+}
+footer .contact a:hover {
+  color: #e74c3c;
 }
 h1 {
   border-bottom: 1px solid #ddd;
@@ -266,6 +300,12 @@ h2 {
 }
 .table td {
   padding: 12px 1.2em;
+}
+.table td.success {
+  color: #18bc9c;
+}
+.table td.danger {
+  color: #e74c3c;
 }
 .parking-entried {
   border: 1px solid #ddd;

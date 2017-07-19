@@ -16,6 +16,14 @@ router.post('/login', (req, res) => {
 });
 
 /**
+ * ログアウト処理
+ */
+router.get('/logout', (req, res) => {
+  req.session.user = null;
+  res.redirect('/');
+});
+
+/**
  * ログインしていなければ別ページを表示
  */
 router.use((req, res, next) => {
@@ -42,6 +50,13 @@ router.get('/', (req, res) => {
  */
 router.get('/parking/:parkingId', (req, res) => {
   res.render('parking', res.args);
+});
+
+/**
+ * チャージ
+ */
+router.get('/charge', (req, res) => {
+    res.render('charge', res.args);
 });
 
 module.exports = router;
