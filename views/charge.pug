@@ -7,16 +7,16 @@ block content
         table.table
             tr
                 th 所持Ｐ
-                td.danger -20pt
+                td.danger#pointChargeBefore(data-point="-20") -20pt
             tr
                 th チャージＰ
                 td.charge-point
-                    input(type="number" name="point" value="0" placeholder="Point")
-                    button(type="button") +10
-                    button(type="button") +100
-                    button(type="button") +1,000
+                    input#pointChargeInput(type="number" name="point" onchange="pointChargeInputChange()" onkeyup="pointChargeInputChange()" value="0" placeholder="Point")
+                    button(type="button" onclick="pointChargeAdd(10)") +10
+                    button(type="button" onclick="pointChargeAdd(100)") +100
+                    button(type="button" onclick="pointChargeAdd(1000)") +1,000
             tr
                 th チャージ後Ｐ
-                td.success 330pt
+                td#pointChargeResult
         
         button.btn.btn-center.btn-info.btn-sm(type="submit") チャージ
