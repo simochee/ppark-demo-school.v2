@@ -37,5 +37,11 @@ router.get('/', (req, res) => {
   res.render('index', res.args);
 });
 
+/**
+ * 入庫確認
+ */
+router.get('/parking/:parkingId', (req, res) => {
+  res.render('parking', res.args);
+});
 
 module.exports = router;

@@ -1,15 +1,31 @@
 extends layout
 
 block content
+
+  .parking-entried
+    .flexbox
+      .left
+        .status-label 入庫中
+        .time 20分
+      .right
+        .parking-name 高専０１（物質棟側駐車場）
+        .used-points
+          span.label 消費ポイント
+          | 20ポイント
+    a.btn.btn-center.btn-success.btn-sm(href="/out") 出庫
+
   h2 駐車場状況
   
   ul.parking-list
-    each i in [0,0,0]
-      li
-        .parking-status 空
-        .parking-name 物質棟側駐車場
-        a(href="/parking/1")
-          span.ion-android-car
+    li
+      .parking-status.empty 空
+      .parking-name 物質棟側駐車場
+      a(href="/parking/1") 入庫
+    li
+      .parking-status.full 満
+      .parking-name 第２体育館側駐車場
+      a.disabled
+        span.ion-android-close
     
   h2 ポイント
   
@@ -18,4 +34,4 @@ block content
       th 所持ポイント
       td 302pt
   
-  a.btn.btn-center.btn-info.btn-sm(href="/charge") チャージ
+  a.btn.btn-center.btn-primary.btn-sm(href="/charge") チャージ

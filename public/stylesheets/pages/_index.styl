@@ -1,0 +1,79 @@
+.parking-entried
+    border 1px solid  #ddd
+    margin 20px 12px
+    padding 20px 10px
+    .flexbox
+        align-items center
+        display flex
+        margin 0 20px
+        .left
+            width 80px
+            margin-right 8px
+            .status-label
+                background $_danger
+                color #fff
+                font-size 13px
+                height 24px
+                line-height 24px
+                text-align center
+                width 80px
+            .time
+                color #555
+                font-size 14px
+                font-weight bold
+                height 30px
+                line-height 30px
+                text-align center
+        .right
+            flex 1
+            text-align center
+            .parking-name
+                height 24px
+                line-height 24px
+                font-size 14px
+            .used-points
+                font-size 15px
+                height 30px
+                line-height 30px
+                .label
+                    color #777
+                    font-size .8em
+                    margin-right 4px
+
+.parking-list
+    margin 0 20px
+    list-style-type none
+    li
+        align-items center
+        border-bottom 1px solid  #ddd
+        display flex
+        padding 18px 8px
+        &:last-child
+            border-bottom 0
+        .parking-status
+            $size = 32px
+            border-radius 2px
+            color rgba(#fff, .8)
+            height $size
+            line-height $size
+            text-align center
+            width $size
+            &.empty
+                background $_info
+            &.full
+                background $_danger
+        .parking-name
+            flex 1
+            margin 0 8px
+        a
+            display block
+            border 1px solid  #666
+            color #666
+            height 28px
+            line-height 28px
+            padding 0 .8em
+            text-align center
+            text-decoration none
+            width 2em
+            &.disabled
+                opacity .4
