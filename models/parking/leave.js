@@ -26,7 +26,7 @@ module.exports = (userId) => {
                     getData(parkingId)
                         .then((data) => {
                             const entried = data.timestamp;
-                            const duration = moment().diff(moment(entried), 'minutes');
+                            const duration = moment().diff(moment(entried).subtract(1, 'm'), 'minutes') + 1;
                             callback(null, parkingId, duration);
                         })
                         .catch((err) => {
@@ -83,8 +83,8 @@ module.exports = (userId) => {
                 },
                 // usersへの更新
                 (duration, callback) => {
-                    const stmt = db.prepare('UPDATE users SET parking = -1 WHERE user_id = ?');
-                    stmt.run(userId, (error) => {
+                    const stmt = db.prepare('UPDATE users SET parking = -1, point = point - ? WHERE user_id = ?');
+                    stmt.run(duration, userId, (error) => {
                         if(error) {
                             reject({
                                 code: STATUS.SQL_ERROR,

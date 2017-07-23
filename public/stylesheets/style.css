@@ -313,6 +313,9 @@ h2 {
 span.success {
   color: #18bc9c;
 }
+span.danger {
+  color: #e74c3c;
+}
 .page404 {
   text-align: center;
   color: #2c3e50;
@@ -403,6 +406,9 @@ span.success {
   line-height: 24px;
   font-size: 14px;
 }
+.parking-entried .flexbox .right .parking-name small {
+  font-size: 0.8em;
+}
 .parking-entried .flexbox .right .used-points {
   font-size: 15px;
   height: 30px;
@@ -444,6 +450,11 @@ span.success {
   flex: 1;
   margin: 0 8px;
 }
+.parking-list li .parking-name small {
+  color: #555;
+  font-size: 0.8em;
+  margin-left: 0.4em;
+}
 .parking-list li a {
   display: block;
   border: 1px solid #666;
@@ -457,6 +468,27 @@ span.success {
 }
 .parking-list li a.disabled {
   opacity: 0.4;
+}
+.point-log {
+  list-style-type: none;
+}
+.point-log li {
+  padding: 12px 30px;
+}
+.point-log li:nth-child(2n + 1) {
+  background: #f5f5f5;
+}
+.point-log li .timestamp {
+  color: #555;
+  font-size: 14px;
+}
+.point-log li .action {
+  font-size: 14px;
+  margin: 10px 12px 0;
+}
+.point-log li .action .point {
+  font-weight: bold;
+  margin-right: 0.6em;
 }
 .login-form {
   display: block;

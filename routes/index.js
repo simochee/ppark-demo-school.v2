@@ -76,15 +76,37 @@ router.use((req, res, next) => {
  * ホーム
  */
 router.get('/', (req, res) => {
-  model.parking.getData()
-    .then((data) => {
-      res.args.parkings = data;
-      res.args.moment = moment;
-      res.render('index', res.args);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
+  async.waterfall([
+    // 駐車場情報を取得
+    (callback) => {
+      model.parking.getData()
+        .then((data) => {
+          res.args.parkings = data;
+          res.args.moment = moment;
+          callback();
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    },
+    // ポイントログを取得
+    (callback) => {
+      model.log.getData(req.session.user)
+        .then((data) => {
+          console.log(data)
+          res.args.pointLog = data;
+          callback();
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    },
+  ], (error) => {
+    if(error) {
+      res.json(error);
+    }
+    res.render('index', res.args);
+  });
 });
 
 /**

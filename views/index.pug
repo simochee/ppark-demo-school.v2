@@ -5,17 +5,18 @@ block content
   if user.parking > 0
     - parkings.forEach((parking) => {
       if parking.id === user.parking
-        - const hours = moment().diff(moment(parking.timestamp), 'hours');
-        - const minutes = moment().diff(moment(parking.timestamp), 'minutes');
+        - const m = moment(parking.timestamp).subtract(1, 'm');
+        - const hours = moment().diff(m, 'hours');
+        - const minutes = moment().diff(m, 'minutes');
         .parking-entried
           .flexbox
             .left
               .status-label 入庫中
-              .time #{hours > 0 ? `${hours}時間` : ''}#{`0${minutes % 60}`.slice(-2)}分
+              .time #{hours > 0 ? `${hours}時間` : ''}#{`${minutes >= 10 ? '0' : ''}${minutes % 60}`.slice(-2)}分
             .right
               .parking-name
                 | #{parking.name}
-                small= parking.description
+                small （#{parking.description}）
               .used-points
                 span.label 消費ポイント
                 | #{minutes}ポイント
@@ -51,3 +52,21 @@ block content
       td(class=(user.point < 0 && 'danger')) #{user.point}pt
   
   a.btn.btn-center.btn-primary.btn-sm(href="/charge") チャージ
+    
+  h2 ポイントログ
+
+  ul.point-log
+    each item in pointLog
+      li
+        .timestamp= item.timestamp.replace(/-/g, '/')
+        p.action
+          if item.chargedBy == 'system'
+            span.point(class=(item.charged < 0 ? 'danger' : 'success')) #{item.charged}pt
+            | ポイントチャージしました 
+          else
+            span.point(class=(item.charged < 0 ? 'danger' : 'success')) #{item.charged}pt
+            | 「
+            each parking in parkings
+              if item.chargedBy == `parking:${parking.id}`
+                | #{parking.name}
+            | 」に #{-item.charged} 分 駐車しました 

@@ -30,6 +30,8 @@
                 height 24px
                 line-height 24px
                 font-size 14px
+                small
+                    font-size .8em
             .used-points
                 font-size 15px
                 height 30px
@@ -64,6 +66,10 @@
         .parking-name
             flex 1
             margin 0 8px
+            small
+                color #555
+                font-size .8em
+                margin-left .4em
         a
             display block
             border 1px solid  #666
@@ -76,3 +82,19 @@
             width 2em
             &.disabled
                 opacity .4
+
+.point-log
+    list-style-type none
+    li
+        padding 12px 30px
+        &:nth-child(2n + 1)
+            background #f5f5f5
+        .timestamp
+            color #555
+            font-size 14px
+        .action
+            font-size 14px
+            margin 10px 12px 0
+            .point
+                font-weight bold
+                margin-right .6em

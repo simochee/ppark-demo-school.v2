@@ -4,6 +4,26 @@ module.exports = (parkingId, userId) => {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
             async.waterfall([
+                // 排他処理
+                (callback) => {
+                    const stmt = db.prepare('SELECT * FROM parkings WHERE id = ?');
+                    stmt.get(parkingId, (error, row) => {
+                        if(error) {
+                            reject({
+                                code: STATUS.SQL_ERROR,
+                                error,
+                            });
+                        } else {
+                            if(row.is_parkable == 1) {
+                                callback();
+                            } else {
+                                reject({
+                                    code: STATUS.PARKING_USING,
+                                });
+                            }
+                        }
+                    });
+                },
                 // parkingsへの更新
                 (callback) => {
                     const stmt = db.prepare('UPDATE parkings SET is_parkable = 0, timestamp = DATETIME(CURRENT_TIMESTAMP, "localtime") WHERE id = ?');
