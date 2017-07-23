@@ -7,7 +7,7 @@ block content
         table.table
             tr
                 th 所持Ｐ
-                td.danger#pointChargeBefore(data-point="-20") -20pt
+                td#pointChargeBefore(class=(user.point < 0 && 'danger') data-point=user.point) #{user.point}pt
             tr
                 th チャージＰ
                 td.charge-point

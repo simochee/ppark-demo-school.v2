@@ -1,0 +1,58 @@
+extends layout
+
+block content
+    if mode === 'entry'
+
+        h1 入庫完了
+
+        p.complete-message ご利用ありがとうございます
+
+        .parking-panel= parking.name
+
+        p.complete-message
+            | へ
+            span.time.success= time
+            | に入庫しました
+
+        a.btn.btn-center.btn-info.btn-sm(href="/") ホームへ
+    
+    if mode == 'charge'
+    
+        h1 チャージ完了
+
+        p.complete-message
+
+        .parking-panel #{point.replace(/(\d)(?=(\d{3})+$)/g , '$1,')} pt
+
+        p.complete-message アカウントへ付与しました
+
+        a.btn.btn-center.btn-info.btn-sm(href="/") ホームへ
+
+    if mode == 'leave'
+    
+        h1 出庫確認
+
+        p.complete-message
+
+        .parking-panel= parking.name
+
+        p.complete-message より出庫します
+
+        form(action="" method="post")
+
+            input(type="hidden" name="parkingId" value=user.parking)
+        
+            button.btn.btn-center.btn-danger(type="submit") 出庫する
+    
+    if mode == 'leaved'
+
+        h1 出庫完了
+
+        p.complete-message ご利用ありがとうございました
+
+
+        .parking-panel #{point.replace(/(\d)(?=(\d{3})+$)/g , '$1,')} pt
+
+        p.complete-message 上記ポイントを消費しました
+
+        a.btn.btn-center.btn-info.btn-sm(href="/") ホームへ

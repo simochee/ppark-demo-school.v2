@@ -202,6 +202,9 @@ body {
 .btn-success {
   background: #18bc9c;
 }
+.btn-danger {
+  background: #e74c3c;
+}
 footer {
   background: #5d87b7;
   bottom: 0;
@@ -307,6 +310,21 @@ h2 {
 .table td.danger {
   color: #e74c3c;
 }
+span.success {
+  color: #18bc9c;
+}
+.page404 {
+  text-align: center;
+  color: #2c3e50;
+}
+.page404 .code {
+  margin-top: 0.4em;
+  font-size: 26.666666666666668vw;
+}
+.page404 p {
+  margin-top: 1em;
+  font-size: 5.333333333333333vw;
+}
 .charge-point input {
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -328,6 +346,24 @@ h2 {
   text-align: center;
   width: 6em;
 }
+.complete-message {
+  font-size: 18px;
+  margin: 32px 0 50px;
+  text-align: center;
+}
+.complete-message .time {
+  font-size: 1.2em;
+  margin: 0 0.4em;
+}
+.parking-panel {
+  border: 2px solid #aaa;
+  color: #555;
+  font-size: 24px;
+  font-weight: bold;
+  display: table;
+  margin: 0 auto;
+  padding: 0.8em 1.2em;
+}
 .parking-entried {
   border: 1px solid #ddd;
   margin: 20px 12px;
@@ -339,7 +375,7 @@ h2 {
   margin: 0 20px;
 }
 .parking-entried .flexbox .left {
-  width: 80px;
+  width: 100px;
   margin-right: 8px;
 }
 .parking-entried .flexbox .left .status-label {
@@ -349,7 +385,6 @@ h2 {
   height: 24px;
   line-height: 24px;
   text-align: center;
-  width: 80px;
 }
 .parking-entried .flexbox .left .time {
   color: #555;

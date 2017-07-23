@@ -6,9 +6,11 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 
 const index = require('./routes/index');
-const users = require('./routes/users');
+const regist = require('./routes/regist');
 
 const app = express();
+
+global.STATUS = require('./statuses');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,8 +30,8 @@ app.use(session({
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/regist', regist);
 app.use('/', index);
-app.use('/users', users);
 
 /*
   // catch 404 and forward to error handler

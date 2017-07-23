@@ -2,36 +2,52 @@ extends layout
 
 block content
 
-  .parking-entried
-    .flexbox
-      .left
-        .status-label 入庫中
-        .time 20分
-      .right
-        .parking-name 高専０１（物質棟側駐車場）
-        .used-points
-          span.label 消費ポイント
-          | 20ポイント
-    a.btn.btn-center.btn-success.btn-sm(href="/out") 出庫
+  if user.parking > 0
+    - parkings.forEach((parking) => {
+      if parking.id === user.parking
+        - const hours = moment().diff(moment(parking.timestamp), 'hours');
+        - const minutes = moment().diff(moment(parking.timestamp), 'minutes');
+        .parking-entried
+          .flexbox
+            .left
+              .status-label 入庫中
+              .time #{hours > 0 ? `${hours}時間` : ''}#{`0${minutes % 60}`.slice(-2)}分
+            .right
+              .parking-name
+                | #{parking.name}
+                small= parking.description
+              .used-points
+                span.label 消費ポイント
+                | #{minutes}ポイント
+          a.btn.btn-center.btn-success.btn-sm(href="/leave") 出庫
+    - });
 
   h1 駐車場状況
   
   ul.parking-list
-    li
-      .parking-status.empty 空
-      .parking-name 物質棟側駐車場
-      a(href="/parking/1") 入庫
-    li
-      .parking-status.full 満
-      .parking-name 第２体育館側駐車場
-      a.disabled
-        span.ion-android-close
+    each parking in parkings
+      li
+        if parking.isParkable == 1
+          .parking-status.empty 空
+        else
+          .parking-status.full 満
+        .parking-name
+          | #{parking.name}
+          small= parking.description
+        if parking.isParkable == 1 && user.parking == -1
+          a(href=`/parking/${parking.id}`) 入庫
+        else if parking.isParkable == 1
+          a.disabled 入庫
+        else
+          a.disabled
+            span.ion-android-close
     
   h1 ポイント
   
   table.table
+    
     tr
       th 所持ポイント
-      td 302pt
+      td(class=(user.point < 0 && 'danger')) #{user.point}pt
   
   a.btn.btn-center.btn-primary.btn-sm(href="/charge") チャージ

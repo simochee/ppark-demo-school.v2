@@ -3,19 +3,21 @@ extends layout
 block content
     h1 入庫確認
 
-    //- img(style="width: 100%" src=`https://maps.googleapis.com/maps/api/staticmap?center=${parking.lat},${parking.lng}&zoom=20&size=400x200&scale=2&maptype=hybrid&markers=size:large%7Ccolor:blue%7Clabel:P%7C${parking.lat},${parking.lng}&key=AIzaSyBsC4yyzgmEmzHncufnINm-nt1JgEy6rdQ`)
-    img.parking-map(src=`https://maps.googleapis.com/maps/api/staticmap?center=33.954119,131.274402&zoom=20&size=400x200&scale=2&maptype=hybrid&markers=size:large%7Ccolor:blue%7Clabel:P%7C33.954119,131.274402&key=AIzaSyBsC4yyzgmEmzHncufnINm-nt1JgEy6rdQ`)
-
+    img.parking-map(src=`https://maps.googleapis.com/maps/api/staticmap?center=${parking.lat},${parking.lng}&zoom=20&size=400x200&scale=2&maptype=hybrid&markers=size:large%7Ccolor:blue%7Clabel:P%7C${parking.lat},${parking.lng}&key=AIzaSyBsC4yyzgmEmzHncufnINm-nt1JgEy6rdQ`)
 
     table.table
         tr
-            th 駐車場
-            td 物質棟側駐車場
+            th 駐車場所
+            td= parking.name
         tr
-            th 駐車区画
-            td 高専０１
+            th 備考
+            td= parking.description
         tr
             th 消費Ｐ
             td 1pt / 1min
 
-    a.btn.btn-center.btn-primary(href="/") 入庫する
+    form(action="" method="post")
+
+        input(type="hidden" name="parkingId" value=parking.id)
+    
+        button.btn.btn-center.btn-primary(type="submit") 入庫する

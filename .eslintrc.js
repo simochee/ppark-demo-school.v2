@@ -47,6 +47,8 @@ module.exports = {
     "plugins": [
     ],
     "globals": {
+        "db": true,
+        "STATUS": true,
     },
     "parserOptions": {
         "sourceType": "module"
