@@ -15,7 +15,6 @@ router.use((req, res, next) => {
     },
     url: req.url,
   };
-  req.session.user = 'simochee';
   next();
 });
 
