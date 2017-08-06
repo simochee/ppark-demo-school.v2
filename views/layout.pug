@@ -24,7 +24,16 @@ html(lang="ja")
         p.thanks ご協力ありがとうございます
         p.contact
           | ご質問・不具合報告は
-          a(href="mailto:simochee@gmail.com") simochee@gmail.com
+          a(href="mailto:private@simo.website") private@simo.website
           | まで
+      
+    if flash.type
+      .flash-message(class=flash.type)
+        case flash.type
+          when 'error'
+            .icon.ion-android-warning
+          when 'success'
+            .icon.ion-checkmark-circled
+        p.message= flash.msg
         
     script(src="/javascripts/script.js")

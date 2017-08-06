@@ -18,6 +18,5 @@ module.exports = (userId, password) => {
             });
             stmt.finalize();
         });
-        db.close();
     });
 };

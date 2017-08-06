@@ -1,7 +1,6 @@
 module.exports = (userId) => {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
-            console.log(userId);
             const stmt = db.prepare('SELECT * FROM users WHERE user_id = ?');
             stmt.get(userId, (error, row) => {
                 if(error) {

@@ -16,6 +16,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  if(!req.body.userId || !req.body.birthday) {
+      res.redirect('/regist?error=yes');
+  }
   const userId = req.body.userId;
   const password = `0${req.body.birthday}`.slice(-4);
   model.user.add(userId, password)
@@ -32,7 +35,7 @@ router.get('/complete', (req, res) => {
     <meta name="viewport" content="width=device-width,initiali-scale=1">
     <div style="text-align:center">
       <h1>登録完了</h1>
-      <p>プロジェクトへ参加いただきありがとうございます</p>
+      <p>プロジェクトへご参加いただきありがとうございます</p>
       <br><br>
       <table style="margin:0 auto">
         <tr>

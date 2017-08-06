@@ -1,0 +1,50 @@
+.table
+    width 100%
+    tr
+        background #fff
+        &:nth-child(even)
+            background #eee
+    th
+        $size = 50px
+        font-size 18px
+        font-weight bold
+        height $size
+        line-height $size
+        text-align center
+        width $size
+        &.parking-entry
+            color $_info
+        &.parking-leave
+            color $_danger
+        &.point-charge
+            color gold
+        &.user-regist
+            color $_primary
+    td
+        font-size 14px
+        max-width 100%
+        &.timestamp
+            font-size 12px
+            width 100px
+        .userId,
+        .parkingId,
+        .charge,
+        .pay
+            font-size 1.4em
+            font-weight bold
+            margin 0 .3em
+        .userId
+            color $_primary
+        .parkingId
+            color $_info
+        .charge
+            color gold
+            & + .unit
+                color gold
+        .pay
+            color $_danger
+            & + .unit
+                color $_danger
+        .unit
+            font-weight bold
+            margin 0 .3em 0 -.2em

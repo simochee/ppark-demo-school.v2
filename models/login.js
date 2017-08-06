@@ -3,7 +3,7 @@ const passwordHash = require('password-hash');
 module.exports = (userId, password) => {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
-            const stmt = db.prepare('SELECT * FROM users WHERE user_id = ?');
+            const stmt = db.prepare('SELECT * FROM users WHERE user_id = ?;');
             stmt.get(userId, (error, row) => {
                 // SQL Error
                 if(error) {

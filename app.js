@@ -7,6 +7,7 @@ const session = require('express-session');
 
 const index = require('./routes/index');
 const regist = require('./routes/regist');
+const viewer = require('./routes/viewer');
 
 const app = express();
 
@@ -25,12 +26,16 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(session({
   secret: 'passwd',
+  cookie: {
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+  },
   rolling: true,
 }));
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/regist', regist);
+app.use('/viewer', viewer);
 app.use('/', index);
 
 /*

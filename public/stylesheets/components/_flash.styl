@@ -1,0 +1,45 @@
+@keyframes flash_message {
+    0% {
+        bottom -60px
+    }
+    20% {
+        bottom: 12px
+    }
+    100% {
+        bottom 12px
+    }
+}
+
+.flash-message
+    $size = 52px
+    align-items center
+    animation flash_message 3s cubic-bezier(0.23, 1, 0.32, 1) 1s 2 alternate
+    border 2px solid
+    border-radius 5px
+    bottom -60px
+    box-sizing border-box
+    color rgba(#fff, .9)
+    display flex
+    height $size
+    left 20px
+    position fixed
+    // pointer-events none
+    right 20px
+    .icon
+        font-size 24px
+        height $size
+        line-height $size
+        margin-right 6px
+        text-align center
+        width $size
+    .message
+        flex 1
+        font-size 14px
+        line-height 1.6
+        margin-right 12px
+    &.error
+        background $_danger
+        border-color darken($_danger, 8%)
+    &.success
+        background $_success
+        border-color darken($_success, 8%)

@@ -22,6 +22,9 @@ router.use((req, res, next) => {
  * ログインページ
  */
 router.get('/login', (req, res) => {
+  if(req.session.user) {
+    res.redirect('/?flash=success&msg=ログインしました');
+  }
   res.args.redirect = req.query.redirect;
   res.render('login', res.args);
 });
@@ -30,12 +33,13 @@ router.post('/login', (req, res) => {
   model.login(req.body.userId, req.body.password)
     .then(() => {
       req.session.user = req.body.userId;
-      res.redirect(req.body.redirect || '/');
+      res.redirect(`${req.body.redirect || '/'}${req.body.redirect.match(/\?/g) ? '&' : '?'}flash=success&msg=ログインしました`);
     })
     .catch((err) => {
       if(err.code === STATUS.LOGIN_FAILED) {
         res.redirect('/login?flash=error&msg=ログイン失敗');
       }
+      console.log('Error on router/[42]', err);
       res.redirect('/login?flash=error&msg=システムエラー');
     });
 });
@@ -45,7 +49,7 @@ router.post('/login', (req, res) => {
  */
 router.get('/logout', (req, res) => {
   req.session.user = null;
-  res.redirect('/');
+  res.redirect('/?flash=success&msg=ログアウトしました');
 });
 
 /**

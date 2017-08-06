@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+html(lang="ja")
+head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title ログビューアー
+    link(rel="stylesheet", href="/stylesheets/viewer.css")
+body
+    
+    .container
+        table.table
+            tbody
+                each item in data
+                    tr
+                        case item.type
+                            when 'parking.entry'
+                                th.parking-entry 入  
+                                td
+                                    span.userId= item.userId
+                                    | が
+                                    span.parkingId= parkings[item.parkingId].name
+                                    | へ
+                                    span.entry 入庫
+                                    | しました
+                            when 'parking.leave'
+                                th.parking-leave 出
+                                td
+                                    span.userId= item.userId
+                                    | が
+                                    span.parkingId= parkings[item.parkingId].name
+                                    | から
+                                    span.entry 出庫
+                                    | しました
+                            when 'point.charge'
+                                th.point-charge Ｐ
+                                td
+                                    span.userId= item.userId
+                                    | が
+                                    if `${item.charged}`.match(/^parking/)
+                                        span.pay= item.amount
+                                        span.unit ポイント
+                                        | 消費しました
+                                    else
+                                        span.charge= item.amount
+                                        span.unit ポイント
+                                        | チャージしました
+                            when 'user.regist'
+                                th.user-regist 登
+                                td
+                                    span.userId=item.userId
+                                    | がサービスへ登録しました
+                        td.timestamp= item.timestamp

@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+const async = require('async');
+const model = require('../models');
+
+async.each([
+    (callback) => {
+        model.user.clear()
+            .then(() => {
+                callback();
+            })
+            .catch((err) => {
+                throw new Error(err);
+            });
+    },
+    (callback) => {
+        model.point.clear()
+            .then(() => {
+                callback();
+            })
+            .catch((err) => {
+                throw new Error(err);
+            });
+    },
+]);
