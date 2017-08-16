@@ -2,6 +2,7 @@ const async = require('async');
 const express = require('express');
 const router = express.Router();
 const model = require('../models');
+const moment = require('moment');
 
 router.get('/', (req, res) => {
     const result = [];
@@ -73,8 +74,10 @@ router.get('/', (req, res) => {
             }
             return 0;
         });
+        console.log(result);
         res.render('viewer', {
             data: result,
+            moment,
             parkings,
         });
     });

@@ -1,0 +1,44 @@
+.viewer-download
+    background #fff
+    border 2px solid  $_success
+    border-radius 4px
+    display none
+    position absolute
+    right 0
+    top 65px
+    z-index 1000
+    &::after
+        content ''
+        border-bottom 12px solid #fff
+        border-left 10px solid transparent
+        border-right 10px solid transparent
+        border-top 0
+        position absolute
+        right 52px
+        top -11px
+    &::before
+        content ''
+        border-bottom 14px solid $_success
+        border-left 12px solid transparent
+        border-right 12px solid transparent
+        border-top 0
+        position absolute
+        right 50px
+        top -14px
+    &.open
+        display block
+    .download-list
+        padding 8px 12px
+        .list-item
+            display block
+            font-size 20px
+            margin .6em 0
+            padding .2em .8em
+            position relative
+            text-decoration none
+            &:hover
+                color $_info
+            &::before
+                content "\f12f"
+                font-family Ionicons
+                margin-right 8px

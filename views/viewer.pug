@@ -5,49 +5,76 @@ head
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title ログビューアー
+    link(rel="stylesheet", href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
     link(rel="stylesheet", href="/stylesheets/viewer.css")
 body
     
-    .container
-        table.table
-            tbody
-                each item in data
+        nav.viewer-navbar
+            .navbar-container
+                .navbar-brand プチＰ ログビューアー
+                .navbar-nav
+                    .data-toggle-buttons
+                        button.active 入出庫
+                        button ポイント
+                    button.nav-button.button-success ダウンロード
+                .viewer-download
+                    .download-list
+                        a.list-item(href="#") parking_list.csv
+                        a.list-item(href="#") point_logs.csv
+
+        #parkingLogs.container
+            table
+                thead
                     tr
-                        case item.type
-                            when 'parking.entry'
-                                th.parking-entry 入  
+                        th #
+                        th 利用者
+                        th 駐車マス
+                        th 操作
+                        th 時刻
+                tbody
+                    - let i = 0
+                    - const entried = {}
+                    each item  in data
+                        if item.type.match(/^parking\./)
+                            - i ++
+                            tr
+                                td= i
+                                td= item.userId
+                                td= parkings[item.parkingId].name
                                 td
-                                    span.userId= item.userId
-                                    | が
-                                    span.parkingId= parkings[item.parkingId].name
-                                    | へ
-                                    span.entry 入庫
-                                    | しました
-                            when 'parking.leave'
-                                th.parking-leave 出
+                                    if item.type.match(/\.entry$/)
+                                        - entried[item.userId] = item.timestamp
+                                        .entry 入庫
+                                    if item.type.match(/\.leave$/)
+                                        .leave 出庫
+                                td= moment(item.timestamp).format('YYYY/MM/DD A hh:mm:ss')
+        
+        #pointLogs.container
+            table
+                thead
+                    tr
+                        th #
+                        th 利用者
+                        th 操作
+                        th 変化
+                        th 時刻
+                tbody
+                    - let j = 0
+                    each item in data
+                        if item.type.match(/^point\./)
+                            - j ++
+                            tr
+                                td= j
+                                td= item.userId
                                 td
-                                    span.userId= item.userId
-                                    | が
-                                    span.parkingId= parkings[item.parkingId].name
-                                    | から
-                                    span.entry 出庫
-                                    | しました
-                            when 'point.charge'
-                                th.point-charge Ｐ
+                                    if item.charged === 'system'
+                                        | チャージ
+                                    if item.charged && item.charged.match(/^parking/)
+                                        | 料金支払
                                 td
-                                    span.userId= item.userId
-                                    | が
-                                    if `${item.charged}`.match(/^parking/)
-                                        span.pay= item.amount
-                                        span.unit ポイント
-                                        | 消費しました
+                                    - const amount = `${item.amount}`.replace(/(\d)(?=(\d{3})+$)/g , '$1,')
+                                    if item.amount < 0
+                                        .paid= amount
                                     else
-                                        span.charge= item.amount
-                                        span.unit ポイント
-                                        | チャージしました
-                            when 'user.regist'
-                                th.user-regist 登
-                                td
-                                    span.userId=item.userId
-                                    | がサービスへ登録しました
-                        td.timestamp= item.timestamp
+                                        .charge= `+${amount}`
+                                td= moment(item.timestamp).format('YYYY/MM/DD A hh:mm:ss')

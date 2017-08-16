@@ -1,0 +1,57 @@
+.viewer-navbar
+    background $_theme
+    z-index 1000
+    .navbar-container
+        align-items center
+        display flex
+        height 48px
+        justify-content space-between
+        margin 0 auto
+        max-width 970px
+        position relative
+        .navbar-brand
+            color rgba(#fff, .95)
+            font-size 18px
+        .navbar-nav
+            display flex
+            .data-toggle-buttons
+                margin 0 8px
+                button
+                    background none
+                    border none
+                    border-top 4px solid transparent
+                    border-bottom 4px solid  transparent
+                    color rgba(#fff, .8)
+                    cursor pointer
+                    font-size 14px
+                    height 48px
+                    outline none
+                    padding 0 14px
+                    &:hover
+                        color #fff
+                        border-bottom-color rgba(#fff, .5)
+                    &.active
+                        border-bottom-color #fff
+                        color #fff
+                        font-weight bold
+            .nav-button
+                border 1px solid
+                border-radius 6px
+                color rgba(#fff, .95)
+                cursor pointer
+                height 38px
+                margin auto 4px
+                outline none
+                padding 0 16px
+                &.button-info
+                    background $_info
+                    border-color darken($_info, 10%)
+                    &:hover,
+                    &.active
+                        background darken($_info, 10%)
+                &.button-success
+                    background $_success
+                    border-color darken($_success, 10%)
+                    &:hover,
+                    &.active
+                        background darken($_success, 10%)
